@@ -13,5 +13,9 @@
 package CellPhone;
 
 public interface PubliclyCloneable extends Cloneable {
+    /**
+     * public clone method for interface
+     * @return Object
+     */
     public Object clone();
 }

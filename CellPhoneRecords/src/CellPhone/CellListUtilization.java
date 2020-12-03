@@ -23,7 +23,8 @@ import java.util.Scanner;
 public class CellListUtilization {
     
     /** 
-     * @param args[]
+     * main method
+     * @param args[] String main method argument
      */
     public static void main(String args[]){
         CellList one = new CellList();
@@ -84,15 +85,15 @@ public class CellListUtilization {
         if(indexFirst < 0)
             System.out.println("Cell list does not contain first serial number");
         if(indexFirst >= 0) 
-            System.out.println("Cell list contains first serial number at position " + (indexFirst + 1));
+            System.out.println("Cell list contains first serial number at position " + (indexFirst));
         if(indexSecond < 0)
             System.out.println("Cell list does not contain second serial number");
         if(indexSecond >= 0) 
-            System.out.println("Cell list contains second serial number at position " + (indexSecond + 1));
+            System.out.println("Cell list contains second serial number at position " + (indexSecond));
         if(indexThird < 0)
             System.out.println("Cell list does not contain third serial number");
         if(indexThird >= 0) 
-            System.out.println("Cell list contains third serial number at position " + (indexThird + 1));
+            System.out.println("Cell list contains third serial number at position " + (indexThird));
         
         //test out every method for cellphone
         CellPhone test1 = new CellPhone(112312311,"test", 2000, 214.00);
@@ -143,7 +144,7 @@ public class CellListUtilization {
         one.showContents();
 
         
-
+        //close keyboard
         keyboard.close();
     }
 }

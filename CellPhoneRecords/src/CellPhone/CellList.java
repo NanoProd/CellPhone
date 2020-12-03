@@ -18,18 +18,32 @@ import java.util.NoSuchElementException;
 public class CellList implements PubliclyCloneable {
 private class CellNode implements PubliclyCloneable
     {
-    //inner class attributes
+    /**
+     * cellphone object
+     */
     private CellPhone cell;
+    /**
+     * pointer for next node
+     */
     private CellNode link;
 
     /*
         Avoid creating accessor methods as this could result in privacy leaks if a user could have access to the reference of one of our nodes
     */
+
     //inner class constructors
+    /**
+     * default constructor sets everything to null
+     */
     public CellNode(){
         cell = null;
         link = null;
     }
+    /**
+     * parametrised constructor 
+     * @param cell CellPhone for cell object
+     * @param link CellNode for pointer to next node
+     */
     public CellNode(CellPhone cell, CellNode link){
         this.cell = cell;
         this.link = link;
@@ -40,6 +54,10 @@ private class CellNode implements PubliclyCloneable
         the private references to the attributes of our class
     */
     @SuppressWarnings("unused")
+    /**
+     * copy constructor that creates a true deep copy
+     * @param other CellNode takes in another cell node to be copied
+     */
 	public CellNode(CellNode other){
         try
         {
@@ -65,6 +83,10 @@ private class CellNode implements PubliclyCloneable
         that the copied item has the same reference as the new item and it is a private method so no outside user will ever have access to 
         the private references to the attributes of our class
     */
+    /**
+     * clone method creates a deep copy of a cell node object and returns a cellnode
+     * @return Object
+     */
     public Object clone()
     {
         try
@@ -88,38 +110,50 @@ private class CellNode implements PubliclyCloneable
     }//end of inner class
 
     //outer class attributes
+    /**
+     * leading cell Node
+     */
     private CellNode head;
     @SuppressWarnings("unused")
+    /**
+     * size of linked list
+     */
 	private int size;
 
    
-   /** 
-    * @return int
-    */
+   
    // Avoid creating accessor and mutator methods  as this could result in privacy leaks if a user could have access to the reference of one of our nodes
     //getter methods
-
+    /** 
+     * returns the size of the linked list
+    * @return int 
+    */
     public int getSize()
     {
         return size();
     }
 
     //constructors
+    /**
+     * default constructor sets everything to their null value or 0
+     */
     public CellList()
     {
         head = null;
         size = 0;
     }
     
-    /** 
-     * @return CellList
-     */
+    
     //outer class public clone() method
     /*
              The following code could have resulted in a pricacy leak if we had not used the copyOf() method, the implemented method avoids 
         that the copied item has the same reference as the new item and it is a private method so no outside user will ever have access to 
         the private references to the attributes of our class
     */
+    /** 
+     * clone method creates a deep copy
+     * @return CellList
+     */
     public CellList clone()
     {
         try
@@ -136,14 +170,13 @@ private class CellNode implements PubliclyCloneable
         }
     }
     
+
     /** 
-     * @param otherHead
+     * returns a true deep copy of a cellNode --> must implement a publicly cloneable interface with a public clone() method
+     * this private method avoids any privacy leaks while handling private instance variables and references of our class members
+     * @param otherHead CellNode the cellNode being copied
      * @return CellNode
      */
-    //copyOf method --> returns a true deep copy of a CellNode --> must implement a publicly cloneable interface with public clone() method
-    /*
-       this private method avoids any privacy leaks while handling private instance variables of our class 
-    */
     private CellNode copyOf(CellNode otherHead)
     {
             if(otherHead == null)
@@ -174,6 +207,10 @@ private class CellNode implements PubliclyCloneable
         that the copied item has the same reference as the new item and it is a private method so no outside user will ever have access to 
         the private references to the attributes of our class
     */
+    /**
+     * copy constructor creates a deep copy of a CellList
+     * @param object CellList object being copied
+     */
     public CellList(CellList object)
     {
         try
@@ -191,9 +228,9 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
-     * @param data
+     * adds CellPhone object to start of linked list, sets CellNode to the original head
+     * @param data CellPhone the cellPhone object being added
      */
-    //add to start method
     public void addToStart(CellPhone data)
     {
         head = new CellNode(data, head);
@@ -201,10 +238,10 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
-     * @param position
-     * @param data
+     * inserts a cellphone object at specified position of the linked list
+     * @param position int representing the position desired
+     * @param data CellPhone object being added
      */
-    //insert at index method 
     public void insertAtIndex(int position, CellPhone data)
     {
         //check if position is valid
@@ -248,9 +285,9 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
-     * @param position
+     * deletes a cellphone member from the linked list
+     * @param position int representing the position of member being removed
      */
-    //delete from index method
     public void deleteFromIndex(int position)
     {
          //check if position is valid
@@ -286,9 +323,9 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
+     * deletes the first member of the linked list
      * @return boolean
      */
-    //delete from start
     public boolean deleteFromStart()
     {
         if(head != null)
@@ -304,10 +341,10 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
-     * @param position
-     * @param data
+     * replaces member at specified position with a new cellPhone object
+     * @param position int representing position of object being replaced
+     * @param data CellPhone data that is replacing old one
      */
-    //replace at index method
     public void replaceAtIndex(int position, CellPhone data)
     {
         //verify that index is legit
@@ -326,9 +363,9 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
+     * returns the size of the linked list
      * @return int
      */
-    //get size of cellList 
     public int size()
     {
         int count = 0;
@@ -343,10 +380,11 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
-     * @param serialNumber
-     * @return int
+     * finds if a cellphone object with specified serial number exists in the linked list
+     * uses private method find() to access the linked list
+     * @param serialNumber long serial number that user wants to search for
+     * @return int value that is negative if list does not contain the object and otherwise returns the position of the member in the linked list
      */
-    //contains method --> uses find method
     public int contains(long serialNumber)
     {
         return find(serialNumber);
@@ -354,10 +392,10 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
-     * @param serialNumber
-     * @return int
+     * private method that searches a linked list for object that has specified serial number attribute
+     * @param serialNumber long serial number being searched for
+     * @return int returns position of object in linked list or -1 if such attribute DNE
      */
-    //private find method
     private int find(long serialNumber)
     {
         int count = 0;
@@ -374,7 +412,9 @@ private class CellNode implements PubliclyCloneable
         return -1;
     }
 
-    //show contents 
+    /**
+     * prints the contents of linked list to the console
+     */
     public void showContents()
     {
         System.out.println("The current size of the list is " + this.size() + ". Here are the contents of the list");
@@ -394,10 +434,10 @@ private class CellNode implements PubliclyCloneable
 
     
     /** 
-     * @param other
+     * equals method verifies if two linked lists represent simailar objects, uses these object's own equals methods to compare
+     * @param other Object other linked list being compared
      * @return boolean
      */
-    //equals method
     public boolean equals(Object other)
     {
         if(other == null)

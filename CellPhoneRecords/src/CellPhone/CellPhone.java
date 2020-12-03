@@ -16,37 +16,52 @@ import java.lang.CloneNotSupportedException;
 //import java.util.Scanner;
 
 public class CellPhone implements PubliclyCloneable{
-    //attributes    
+    //attributes   
+        /**
+         * serial number of cellphone object
+         */ 
         private long serialNum;
+        /**
+         * brand of cellphone
+         */
         private String brand;
+        /**
+         * year of cell phone
+         */
         private int year;
+        /**
+         * price of phone
+         */
         private double price;
 
     
     /** 
-     * @param serialNum
+     * sets serial number
+     * @param serialNum long for new serial number
      */
-    //setters
-        public void setSerialNum(long serialNum){
+        protected void setSerialNum(long serialNum){
             this.serialNum = serialNum;
         }
         
         /** 
-         * @param brand
+         * sets brand of phone
+         * @param brand String new brand name
          */
         public void setBrand(String brand){
             this.brand = brand;
         }
         
         /** 
-         * @param year
+         * sets year attribute
+         * @param year int for new year
          */
         public void setYear(int year){
             this.year = year;
         }
         
         /** 
-         * @param price
+         * sets price of phone
+         * @param price double price
          */
         public void setPrice(double price){
             this.price = price;
@@ -54,14 +69,15 @@ public class CellPhone implements PubliclyCloneable{
 
     
     /** 
+     * returns serial number of cellPhone object
      * @return long
      */
-    //getters
-        public long getSerialNum(){
+        protected long getSerialNum(){
             return serialNum;
         }
         
         /** 
+         * gets brand
          * @return String
          */
         public String getBrand(){
@@ -69,6 +85,7 @@ public class CellPhone implements PubliclyCloneable{
         }
         
         /** 
+         * gets year
          * @return int
          */
         public int getYear(){
@@ -76,20 +93,31 @@ public class CellPhone implements PubliclyCloneable{
         }
         
         /** 
+         * gets price
          * @return double
          */
         public double getPrice(){
             return price;
         }
 
-    //constructors
-        public CellPhone(){
+        /**
+         * default constructor sets everything to the 0 value
+         */
+        public CellPhone()
+        {
             //this constructor should never be used because of the serial number rule
             serialNum = 0;
             brand = "";
             year = 0;
             price = 0.0;
         }
+        /**
+         * parametrized constructor
+         * @param serialNum long for serial number
+         * @param brand String for brand name
+         * @param year int for year
+         * @param price double for price
+         */
         public CellPhone(long serialNum, String brand, int year, double price){
             //it is assumed that user will input unique serial number
             this.serialNum = serialNum;
@@ -99,15 +127,21 @@ public class CellPhone implements PubliclyCloneable{
             this.price = price;
         }
         //deep copy
+        /**
+         * copy constructor that makes a true deep copy
+         * @param object CellPhone object being copied
+         * @param serialNum long new serial number
+         */
         public CellPhone(CellPhone object, long serialNum){
             //user will have to put in new serial number to make it unique
             this(serialNum, object.getBrand(),object.getYear(),object.getPrice());
         }
         
         /** 
+         * clone method returns a deep copy
+         * user has to change serial number of object after creating a clone.
          * @return CellPhone
          */
-        //user has to change serial number of object after creating a clone.
         public CellPhone clone()
         {
           //  Scanner keyboard = new Scanner(System.in);
@@ -124,9 +158,7 @@ public class CellPhone implements PubliclyCloneable{
             }
         }
         
-        /** 
-         * @return String
-         */
+        
         //clone method with serial number included
         /*
         public Object clone(long serialNum) throws CloneNotSupportedException{
@@ -135,12 +167,17 @@ public class CellPhone implements PubliclyCloneable{
             return cloned;
         }
         */
+        /**
+         * to string method 
+         * @return String
+         */
         public String toString(){
             return this.getSerialNum() + ": " + this.getBrand() + " " + this.getPrice() + "$ " + this.getYear();
         }
         
         /** 
-         * @param object
+         * equals method that compares every attribute except serial number
+         * @param object CellPhone object being compared with
          * @return boolean
          */
         public boolean equals(CellPhone object){
