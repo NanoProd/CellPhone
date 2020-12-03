@@ -1,0 +1,77 @@
+
+import java.lang.CloneNotSupportedException;
+
+
+public class CellPhone implements Cloneable{
+    //attributes    
+        private long serialNum;
+        private String brand;
+        private int year;
+        private double price;
+
+    //setters
+        public void setSerialNum(long serialNum){
+            this.serialNum = serialNum;
+        }
+        public void setBrand(String brand){
+            this.brand = brand;
+        }
+        public void setYear(int year){
+            this.year = year;
+        }
+        public void setPrice(double price){
+            this.price = price;
+        }
+
+    //getters
+        public long getSerialNum(){
+            return serialNum;
+        }
+        public String getBrand(){
+            return brand;
+        }
+        public int getYear(){
+            return year;
+        }
+        public double getPrice(){
+            return price;
+        }
+
+    //constructors
+        public CellPhone(){
+            //this constructor should never be used because of the serial number rule
+            serialNum = 0;
+            brand = "";
+            year = 0;
+            price = 0.0;
+        }
+        public CellPhone(long serialNum, String brand, int year, double price){
+            //it is assumed that user will input unique serial number
+            this.serialNum = serialNum;
+            //it is assumed that brand will only be one word
+            this.brand = brand;
+            this.year = year;
+            this.price = price;
+        }
+
+        public CellPhone(CellPhone object, long serialNum){
+            //user will have to put in new serial number to make it unique
+            this.serialNum = serialNum;
+            this.brand = object.getBrand();
+            this.year = object.getYear();
+            this.price = object.getPrice();
+        }
+
+        public Object clone(long serialNum) throws CloneNotSupportedException{
+            CellPhone cloned = (CellPhone)super.clone();
+            cloned.setSerialNum(serialNum);
+            return cloned;
+        }
+        public String toString(){
+            return this.getSerialNum() + " " + this.getBrand() + "\t" + this.getPrice() + " " + this.getYear();
+        }
+        public boolean equals(CellPhone object){
+            return (this.getBrand() == object.getBrand()) && (this.getPrice() == object.getPrice()) && (this.getYear() == object.getYear());
+        }
+
+}   

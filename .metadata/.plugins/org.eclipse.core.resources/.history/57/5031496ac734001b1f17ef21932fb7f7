@@ -1,0 +1,153 @@
+package CellPhone;
+
+public class CellList<?> implements Cloneable{
+    private class CellNode<CellPhone> implements Cloneable{
+        //attributes
+        private CellPhone cell;
+        private CellNode<CellPhone> pointer; 
+
+        //accessor
+        public CellPhone getCell(){
+            return cell;
+        }
+        public CellNode<CellPhone> getPointer(){
+            return pointer;
+        }
+        //setter
+        public void setCell(CellPhone cell){
+            this.cell = cell;
+        }
+        public void setPointer(CellNode<CellPhone> pointer){
+            this.pointer = pointer;
+        }
+        //constructors
+        public CellNode(){
+            cell = null;
+            pointer = null;
+        }
+        public CellNode(CellPhone cell, CellNode<CellPhone> pointer){
+            this.cell = cell;
+            this.pointer = pointer;
+        }
+        public CellNode(CellNode<CellPhone> object){
+            this.cell = object.cell;
+            this.pointer = object.pointer;
+        }
+
+        public Object clone(long serialNum) throws CloneNotSupportedException{
+            CellNode<CellPhone> temp = (CellNode<CellPhone>)super.clone();
+            return temp;
+        }
+
+    }//end of inner class
+
+    //attributes
+    private CellNode<CellPhone> head;
+    private int size;
+
+    //setter
+    public void setHead(CellNode<CellPhone> head){
+        this.head = head;
+    }
+    public void increaseSize(){
+        size++;
+    }
+    public void decreaseSize(){
+        size--;
+    }
+    //getter 
+    public CellNode<CellPhone> getHead(){
+        return head;
+    }
+    public int getSize(){
+        return size;
+    }
+
+    //constructors
+    public CellList(){
+        head = null;
+        size = 0;
+    }
+    
+    public void addToStart(CellPhone data){
+        head = new CellNode<CellPhone> (data, head);
+    }
+
+    public boolean deleteFromStart(){
+        if (head != null){
+            head = head.pointer;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //method to get size
+    public int size(){
+        int count = 0;
+        CellNode<CellPhone> position = head;
+        while(position != null){
+            count ++;
+            position = position.pointer;
+        }
+        return count;
+    }
+
+    //contains method
+    public boolean contains(long serialNumber){
+        return(find(serialNumber) != null);
+    }
+
+    private CellNode<CellPhone> find(long serialNumber){
+        CellNode<CellPhone> position = head;
+        CellPhone itemAtPosition;
+        while(position != null){
+            itemAtPosition = position.getCell();
+            if(itemAtPosition.getSerialNum() == serialNumber){
+                return position;
+            }
+            position = position.pointer;
+        }
+        return null;
+    }
+
+
+    //show contents
+    public void showContents(){
+        CellNode<CellPhone> position = head;
+        while(position != null){
+            System.out.println(position.cell);
+            position = position.pointer;
+        }
+    }
+
+    //equals method
+    public boolean equals(Object other){
+        if(other == null){
+            return false;
+        }
+        else if(getClass() != other.getClass()){
+            return false;
+        }
+        else{
+            CellList<CellNode<CellPhone>> otherList = (CellList<CellNode<CellPhone>>) other;
+            if (size() != otherList.size()){
+                return false;
+            }
+            CellNode<CellPhone> position = head;
+            CellNode<CellPhone> otherPosition = otherList.head;
+            while(position!= null){
+                if(!(position.cell.equals(otherPosition.cell)))
+                    return false;
+                position = position.pointer;
+                otherPosition = otherPosition.pointer;
+            }
+            return true; //no mismatch found
+        }
+    }
+
+
+ 
+    }
+
+}
